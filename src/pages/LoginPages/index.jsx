@@ -1,21 +1,25 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { AuthContext } from "../../contexts/auth";
 
 export const LoginPage = () => {
+    const { authenticated, login } = useContext(AuthContext);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
    
     const handleSubmit = (e) => {
-
         e.preventDefault()
 
-        console.log('submit', {email, password})
+        console.log('submit', {email, password});
+        login(email,password)
     };
-
 
     return (
         < >
             <div className="bg-gray-400 flex flex-col justify-center items-center p-0 px-2 min-h-screen"  id="login">
                <h1 className="font-black mb-10 text-2xl" >Login</h1> 
+                <p>{String(authenticated)}</p>
                <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit}>
                 <div className="mb-5" >
                     <label className="block m-1"  htmlFor="email">Email</label>
